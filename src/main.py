@@ -13,10 +13,12 @@ from sklearn.metrics import confusion_matrix
 
 # Control variables:
 random_seed = 193777
+scoring = 'accuracy'
 test_size = 0.15
 
 print("General info:")
 print(">> Test size: %.2f%%" % (test_size*100))
+print(">> Scoring type: ", scoring.capitalize())
 print(">> Seed used: %d" % (random_seed))
 print("")
 
@@ -42,3 +44,32 @@ classifiers.append(('Default RF',
                                            min_samples_leaf = 1,
                                            max_features = 'auto',
                                            max_leaf_nodes = None)))
+classifiers.append(('Entropy-500 RF',
+                    RandomForestClassifier(n_estimators = 500,
+                                           criterion = 'entropy',
+                                           max_depth = None,
+                                           min_samples_split = 2,
+                                           min_samples_leaf = 1,
+                                           max_features = 'auto',
+                                           max_leaf_nodes = None)))
+
+# Cross-validation predictions and test results:
+for name, rf in classifiers:
+    print("Classifier: %s" % (name))
+
+    # 10 fold cross-validation estimate:
+    kfold = model_selection.KFold(n_splits = 10, random_state = random_seed)
+    cv_results = model_selection.cross_val_score(rf, train_features,
+                                                 train_labels, cv = kfold,
+                                                 scoring = scoring)
+    print(">> Cross-validation score: %f (%f)" %
+          (cv_results.mean(), cv_results.std()))
+
+    # Test results:
+    rf.fit(train_features, train_labels)
+    predictions = rf.predict(test_features)
+    print(">> Accuracy: %f\n" % (accuracy_score(test_labels, predictions)))
+    # print("Classification report:")
+    # print(classification_report(test_labels, predictions))
+    # print("Confusion matrix:")
+    # print(confusion_matrix(test_labels, predictions), '\n')
