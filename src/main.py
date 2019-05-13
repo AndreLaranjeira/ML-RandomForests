@@ -16,7 +16,7 @@ from data_holder import *
 
 # Main function:
 
-# Por André vvvv
+# Feito por André vvvv
 start_time = time.time()
 
 # Control variables:
@@ -35,7 +35,7 @@ leaf_dataset = pandas.read_csv('data/leaf.csv', header = None)
 leaf_features = leaf_dataset.values[:,2:]
 leaf_labels = list(map(int, leaf_dataset.values[:,0]))
 
-# Train and test splitting:
+# Train and test splitting (Baseado no exemplo de teste feito em sala de aula):
 train_features, test_features, train_labels, test_labels = \
 model_selection.train_test_split(leaf_features,
                                  leaf_labels,

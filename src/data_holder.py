@@ -14,7 +14,7 @@ class DataHolder:
     self.max_features = max_features
     self.data = data
 
-  # Por André vvvv
+  # Feito por André (baseado no projeto de teste realizado em sala de aula) vvvv
   def generate_data(self, name, classifiers, train_features, train_labels, test_features, test_labels, verbose=False, random_seed=193777, scoring='accuracy', test_size=0.15):
     acc_graph = []
     cv_graph = []
@@ -41,7 +41,7 @@ class DataHolder:
       acc_graph.append(acc)
       cv_graph.append(cv_results)
     return (acc_graph, cv_graph)
-  # Por André ^^^^
+  # Feito por André (baseado no projeto de teste realizado em sala de aula) ^^^^
 
   def generate_all_data(self, train_features, train_labels, test_features, test_labels, verbose=False):
     data = {}
