@@ -121,8 +121,9 @@ names = [
 
 for data in datas:
   data.generate_all_data(train_features, train_labels, test_features, test_labels, verbose=True)
-  max_acc, best_classifier = data.get_max_acc()
+
 for data in datas:
+  max_acc, best_classifier = data.get_max_acc()
   print('Best Accuracy for ' + data.get_legend(' '+str(max_acc)) )
   print('Parameters:')
   for name in names:
